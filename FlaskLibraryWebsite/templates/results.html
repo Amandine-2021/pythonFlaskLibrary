@@ -1,0 +1,51 @@
+<!-- filename: results.html
+     Final project CSC217-Python FlaskLibrary
+     Amandine Velamala -->
+
+{% extends "base.html" %}
+{% block title %}Search Results{% endblock %}
+{% block content %}
+<br>
+<h3 class="medWidth">Search Results</h3>
+<br>
+    {% if searchField and searchTerm %}
+<p class="medWidth">for {{searchField}} : {{searchTerm}}</p>
+    {% endif %}
+<br>
+{% if not results %}
+      <p class="medWidth">No books found for this search. Try another search</p>
+{% else %}
+      <div>
+         {% for result in results %}
+         <form method="POST" action="/changeBookStatus">
+             <div class="bookDisplayBox">
+              <div class="bookDesc">
+                  <ul>
+                      <li>{{ result.title }}</li>
+                      <li class="bookDetails">Author: {{result.author_first_name}} {{result.author_last_name}}</li>
+                      <li class="bookDetails">Genre: {{result.genre}}</li>
+                      <li class="bookDetails">Publisher: {{result.publisher}}</li>
+                      <li class="bookDetails">ISBN: {{result.isbn}}</li>
+                  </ul>
+              </div>
+              <div class="bookButton">
+                   <input type="text" name="libraryID" id="libraryID" placeholder="Enter library ID">
+                   {% if result.checkedIn == True %}
+                        <input type="hidden" name="actionType" id="actionType" value="checkout">
+                        <input type="hidden" name="isbn" id="isbn" value="{{result.isbn}}">
+                        <button type="submit" class="borrowStatusBtn checkout">Check out Book</button>
+                   {% else %}
+                        <input type="hidden" name="actionType" id="actionType" value="return">
+                        <input type="hidden" name="isbn" id="isbn" value="{{result.isbn}}">
+                         <button type="submit" class="borrowStatusBtn checkin">Return Book</button>
+                        {% if (today - result.checkedOutDate).days > 7 %}
+                            <p class="lateFee">{{(today - result.checkedOutDate).days - 7}} days late. Late fee due! </p>
+                        {% endif %}
+                   {% endif %}
+              </div>
+             </div>
+         </form>
+        {% endfor %}
+      </div>
+{% endif %}
+{% endblock %}

@@ -1,1 +1,29 @@
+<!-- filename: index.html
+     Final project CSC217-Python FlaskLibrary
+     Amandine Velamala -->
 
+{% extends "base.html" %}
+{% block title %}Library Home{% endblock %}
+{% block content%}
+<form method="POST"  action="displayAllBooks">
+    <h3>Book Search</h3>
+    <br>
+        <label>Display all Books in Catalog</label>
+        <button type="submit" class="submit" >Display All Books</button>
+</form>
+<br><br>
+<form method="POST"  action="search">
+  <div>
+     <label for="searchField">Search by</label>
+       <select id="searchField" name="searchField">
+         <option value="title">Title</option>
+         <option value="isbn">ISBN</option>
+         <option value="author_last_name">Author</option>
+         <option value="genre">Genre</option>
+         <option value="publisher">Publisher</option>
+       </select>
+     <input type="text"  id="searchTerm" name="searchTerm" placeholder="isbn/title/last name/genre or publisher"/>
+  <button type="submit" class="submit">Search</button>
+  </div>
+</form>
+{% endblock %}

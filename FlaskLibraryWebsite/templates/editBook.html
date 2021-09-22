@@ -1,0 +1,44 @@
+<!-- filename: editBook.html
+     Final project CSC217-Python FlaskLibrary
+     Amandine Velamala -->
+
+{% extends "base.html" %}
+{% block title %}library Mangement - Edit a Book{% endblock %}
+{% block content  %}
+{% if msg %}
+<div>{{msg}}</div>
+{%endif%}
+<form method="POST"  action="/editBook" >
+  <h3>Edit a Book</h3>
+    <p>You need a valid administrator id and password to edit a book.</p>
+    <div>
+        <label for="adminID">Administrator id</label>
+        <input type="text"  id="adminID" name="adminID"   placeholder="Enter your administrator id" />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"   placeholder="Enter your password"/>
+    </div>
+    <div>
+        <label for="isbn">ISBN of the book to be edited</label>
+        <input type="text"  id="isbn" name="isbn" placeholder="Enter the ISBN"/>
+    </div>
+
+    <div>
+        <label for="newEntryType">Field to be edited</label>
+        <select id="newEntryType" name="newEntryType">
+            <option value="title">title</option>
+            <option value="author_first_name">author first name</option>
+            <option value="author_last_name">author last name</option>
+            <option value="genre">genre</option>
+            <option value="publisher">publisher</option>
+            <option value="description">description</option>
+         </select>
+        <br>
+         <input type="text"  id="newEntryData" name="newEntryData" placeholder="New data"/>
+    </div>
+  <button type="submit" class="submit">Submit</button>
+</form>
+<br>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+<!-- filename: deleteBook.html
+     Final project CSC217-Python FlaskLibrary
+     Amandine Velamala -->
+
+{% extends "base.html" %}
+{% block title %}Library Management - Delete a book{% endblock %}
+{% block content%}
+{% if msg %}
+<div>{{msg}}</div>
+{%endif%}
+<form method="POST"  action="/deleteBook">
+  <h3>Delete a Book</h3>
+    <p>You need a valid administrator id and password to delete a book.</p>
+    <div>
+        <label for="adminID">Administrator id</label>
+        <input type="text"  id="adminID" name="adminID"   placeholder="Enter your administrator id" />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"   placeholder="Enter your password"/>
+    </div>
+    <div>
+        <label for="isbn">ISBN of the book to be deleted</label>
+        <input type="text"  id="isbn" name="isbn" placeholder="Enter the ISBN"/>
+    </div>
+  <button type="submit" class="submit">Submit</button>
+</form>
+<br>
+{% endblock %}

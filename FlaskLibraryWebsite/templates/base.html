@@ -1,0 +1,37 @@
+<!-- filename: base.html
+     Final project CSC217-Python FlaskLibrary
+     Amandine Velamala -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
+   <title>{% block title %}Home{% endblock %}</title>
+  </head>
+  <body>
+    <nav>
+        <div class="navContent">
+            <a class="nav-item nav-link" id="home" href="/">Search</a>
+            <a class="nav-item nav-link" id="addBook" href="/addBook">Add Book</a>
+            <a class="nav-item nav-link" id="deleteBook" href="/deleteBook">Delete Book</a>
+            <a class="nav-item nav-link" id="editBook" href="/editBook">Edit Book</a>
+        </div>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul >
+        {% for category, message in messages %}
+          <div class="{{ category }}">
+            <li class="alerts">{{ message }}</li>
+          </div>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+  </body>
+</html>
